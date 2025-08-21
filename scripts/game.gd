@@ -9,8 +9,8 @@ static var builder_map: Array[Callable] = [
 func _ready() -> void:
 	$SpawnMobTimer.start()
 
-func spawn_bullet(position: Vector2, angle: float) -> void:
-	add_child(Bullet.create(position, angle))
+func spawn_bullet(pos: Vector2, angle: float) -> void:
+	add_child(Bullet.create(pos, angle))
 
 func _on_spawn_mob_timer_timeout() -> void:
 	var size: Vector2 = get_viewport_rect().size

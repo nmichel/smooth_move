@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbd40uim2adou"]
+[gd_scene load_steps=4 format=3 uid="uid://bbd40uim2adou"]
 
+[ext_resource type="Shader" uid="uid://usf5u6khopgl" path="res://player.gdshader" id="1_i3pqv"]
 [ext_resource type="Script" uid="uid://cfpxilrsagex3" path="res://player.gd" id="1_onrkg"]
-[ext_resource type="Script" uid="uid://ch6d2y4nwhurd" path="res://player_geom_display.gd" id="2_i3pqv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3pqv"]
+shader = ExtResource("1_i3pqv")
+shader_parameter/blink_color = Color(1, 1, 1, 1)
+shader_parameter/blink_intensity = 1.0
 
 [node name="Player" type="Area2D"]
+collision_mask = 8
 input_pickable = false
 script = ExtResource("1_onrkg")
 
@@ -11,7 +17,9 @@ script = ExtResource("1_onrkg")
 polygon = PackedVector2Array(-10, -14, 10, -10, 10, 10, -10, 14)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_i3pqv")
 scale = Vector2(0.8, 0.8)
-script = ExtResource("2_i3pqv")
+color = Color(1, 0, 1, 1)
+uv = PackedVector2Array(-106.5, 14.5, -104, -112, -1, -95.5, -8, -17.5)
 
-[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]

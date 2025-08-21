@@ -4,9 +4,9 @@ const BULLET_SCENE: PackedScene = preload("res://bullet.tscn")
 
 var speed_direction: Vector2;
 
-static func create(position: Vector2, angle: float) -> Bullet:
+static func create(pos: Vector2, angle: float) -> Bullet:
 	var bullet: Bullet = BULLET_SCENE.instantiate()
-	bullet.position = position
+	bullet.position = pos
 	bullet.global_rotation = angle
 	return bullet
 
@@ -23,5 +23,5 @@ func _process(delta: float) -> void:
 func _on_bullet_visibility_notifier_screen_exited() -> void:
 	queue_free()
 
-func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+func _on_area_shape_entered(_area_rid: RID, _area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	queue_free()

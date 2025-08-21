@@ -7,8 +7,15 @@ var angular_speed: float = PI / 2.0 * 4
 var angle: float = 0.0
 var linear_speed: float = 0.0
 var speed_direction: Vector2 = Vector2(cos(angle), sin(angle))
+
+func _ready() -> void:
+	$Polygon2D.polygon = $CollisionPolygon2D.polygon
+	# set_collision_mask(8)
+
+	print("player collision layer: ", collision_layer)
+	print("player collision mask: ", collision_mask)
 	
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("ui_accept"):
 		get_tree().root.get_node("Game").spawn_bullet(position, angle)
 
@@ -26,8 +33,8 @@ func _process(delta: float) -> void:
 	elif Input.is_action_pressed("ui_down"):
 		linear_speed -= LINEAR_SPEED_PER_SECOND * delta
 	else:
-		var sign: float = signf(linear_speed)
-		linear_speed += -sign * LINEAR_SPEED_PER_SECOND * delta
+		var speed_sign: float = signf(linear_speed)
+		linear_speed += -speed_sign * LINEAR_SPEED_PER_SECOND * delta
 
 	angle += angular_direction * angular_speed * delta
 	if angle > 2.0 * PI:
@@ -38,6 +45,5 @@ func _process(delta: float) -> void:
 	global_rotation = angle
 	position += speed_direction * linear_speed * delta
 
-func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	print("player collision")
+func _on_area_shape_entered(_body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
 	linear_speed = 0
