@@ -1,0 +1,32 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="smooth_move"
+run/main_scene="res://game.tscn"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+
+[display]
+
+window/size/viewport_width=600
+window/size/viewport_height=800
+window/dpi/allow_hidpi=false
+
+[layer_names]
+
+2d_physics/layer_2="Players Bullet"
+2d_physics/layer_3="Walls"
+2d_physics/layer_4="Enemies"
