@@ -4,17 +4,20 @@ const ENTITY_SCENE: PackedScene = preload("res://scenes/entity.tscn")
 
 @onready var health_bar: HealthBar = $HealthBar
 
+var max_health: float
+var health: float
 var scale_factor: float
 var shape: PackedVector2Array
 var angle: float = randf_range(0, 2 * PI)
 var angular_speed: float = randf_range(0, 1)
 var color: Color = Color.WHITE
 
-static func create(shape: PackedVector2Array, pos: Vector2, scale_factor: float) -> Entity:
+static func create(shape_in: PackedVector2Array, pos: Vector2, scale_factor_in: float) -> Entity:
 	var entity: Entity = ENTITY_SCENE.instantiate()
-	entity.scale_factor = scale_factor
-	entity.shape = shape
+	entity.scale_factor = scale_factor_in
+	entity.shape = shape_in
 	entity.position = pos
+	entity.max_health = scale_factor_in
 	return entity
 
 func _ready() -> void:
@@ -25,6 +28,8 @@ func _ready() -> void:
 	$LocalFrame/Polygon2D.color = color
 
 	$HealthBar.position.y = -scale_factor - 10;
+
+	health = max_health
 
 func _process(delta: float) -> void:
 	position += Vector2(0, 1) * 100 * delta
@@ -37,6 +42,14 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
 func _on_local_frame_area_shape_entered(_area_rid: RID, _area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
+	# Update state
+	health -= 1
+	if health <= 0:
+		queue_free()
+		
+	health_bar.set_value(health / max_health)
+
+	# Lauch VFX
 	create_tween().bind_node(self).tween_method(set_shader_blink_intensity, 1.0, 0, 0.2)	
 	create_tween().bind_node(self).tween_method(set_health_bar_alpha, 1.0, 0.0, 0.5)
 	$"..".spawn_bullet_explosion(position)
@@ -47,3 +60,4 @@ func set_shader_blink_intensity(value: float) -> void:
 
 func set_health_bar_alpha(value: float) -> void:
 	$HealthBar.modulate.a = value
+	

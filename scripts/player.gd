@@ -8,7 +8,7 @@ var angle: float = 0.0
 var linear_speed: float = 0.0
 var speed_direction: Vector2 = Vector2(cos(angle), sin(angle))
 
-@onready var polygon: Polygon2D = $Polygon2D
+@onready var polygon: Polygon2D = $LocalFrame/Polygon2D
 
 func _ready() -> void:
 	$LocalFrame/Polygon2D.polygon = $LocalFrame/CollisionPolygon2D.polygon
