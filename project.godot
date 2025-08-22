@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="smooth_move"
-run/main_scene="res://game.tscn"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/icons/icon.svg"
 
 [debug]
 

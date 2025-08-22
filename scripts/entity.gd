@@ -1,6 +1,6 @@
 class_name Entity extends Area2D
 
-const ENTITY_SCENE: PackedScene = preload("res://entity.tscn")
+const ENTITY_SCENE: PackedScene = preload("res://scenes/entity.tscn")
 
 var angle: float = randf_range(0, 2 * PI)
 var angular_speed: float = randf_range(0, 1)
