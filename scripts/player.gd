@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 const LINEAR_SPEED_PER_SECOND: float = 1000;
 
@@ -11,8 +11,8 @@ var speed_direction: Vector2 = Vector2(cos(angle), sin(angle))
 @onready var polygon: Polygon2D = $Polygon2D
 
 func _ready() -> void:
-	$Polygon2D.polygon = $CollisionPolygon2D.polygon
-	$Polygon2D.color = Color.WEB_PURPLE
+	$LocalFrame/Polygon2D.polygon = $LocalFrame/CollisionPolygon2D.polygon
+	$LocalFrame/Polygon2D.color = Color.WEB_PURPLE
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("ui_accept"):
@@ -41,14 +41,14 @@ func _process(delta: float) -> void:
 
 	speed_direction = Vector2(cos(angle), sin(angle))
 
-	global_rotation = angle
+	$LocalFrame.global_rotation = angle
 	position += speed_direction * linear_speed * delta
 
-func _on_area_shape_entered(_body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
+func _on_local_frame_area_shape_entered(_body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
 	var tween: Tween = create_tween()
 	tween.tween_method(set_shader_blink_intensity, 1.0, 0, 0.2)
 	$"..".start_shake_camera()
 
 func set_shader_blink_intensity(value: float) -> void:
-	var shader_material: ShaderMaterial = polygon.material as ShaderMaterial
+	var shader_material: ShaderMaterial = $LocalFrame/Polygon2D.material as ShaderMaterial
 	shader_material.set_shader_parameter("blink_intensity", value)
