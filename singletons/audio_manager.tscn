@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://xst6188d8ke2"]
+
+[ext_resource type="Script" uid="uid://c77xncnmdsuxr" path="res://singletons/audio_manager.gd" id="1_dkrcq"]
+[ext_resource type="AudioStream" uid="uid://c338mnh870ul5" path="res://assets/sounds/cubical_abyss.mp3" id="2_353op"]
+
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("tracks")]
+script = ExtResource("1_dkrcq")
+tracks = NodePath("Tracks")
+
+[node name="Tracks" type="Node" parent="."]
+
+[node name="CubicalAbyss" type="AudioStreamPlayer" parent="Tracks"]
+stream = ExtResource("2_353op")
