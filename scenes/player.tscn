@@ -24,6 +24,7 @@ scale = Vector2(0.8, 0.8)
 uv = PackedVector2Array(-106.5, 14.5, -104, -112, -1, -95.5, -8, -17.5)
 
 [node name="HealthBar" parent="." instance=ExtResource("3_qhqgy")]
+modulate = Color(1, 1, 1, 1)
 position = Vector2(1, -22)
 
 [connection signal="area_shape_entered" from="LocalFrame" to="." method="_on_local_frame_area_shape_entered"]

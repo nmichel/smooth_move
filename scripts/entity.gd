@@ -1,38 +1,49 @@
-class_name Entity extends Area2D
+class_name Entity extends Node2D
 
 const ENTITY_SCENE: PackedScene = preload("res://scenes/entity.tscn")
 
+@onready var health_bar: HealthBar = $HealthBar
+
+var scale_factor: float
+var shape: PackedVector2Array
 var angle: float = randf_range(0, 2 * PI)
 var angular_speed: float = randf_range(0, 1)
 var color: Color = Color.WHITE
 
 static func create(shape: PackedVector2Array, pos: Vector2, scale_factor: float) -> Entity:
 	var entity: Entity = ENTITY_SCENE.instantiate()
-	var collision_polygon: CollisionPolygon2D = entity.get_child(0)
-	collision_polygon.polygon = shape
+	entity.scale_factor = scale_factor
+	entity.shape = shape
 	entity.position = pos
-	entity.scale = Vector2(scale_factor, scale_factor)
 	return entity
 
 func _ready() -> void:
-	$Polygon2D.polygon = $CollisionPolygon2D.polygon
-	$Polygon2D.color = color
-	global_rotation += angular_speed
+	$LocalFrame.scale = Vector2(scale_factor, scale_factor)
+	$LocalFrame.global_rotation += angular_speed
+	$LocalFrame/CollisionPolygon2D.polygon = shape
+	$LocalFrame/Polygon2D.polygon = shape
+	$LocalFrame/Polygon2D.color = color
+
+	$HealthBar.position.y = -scale_factor - 10;
 
 func _process(delta: float) -> void:
 	position += Vector2(0, 1) * 100 * delta
 	angle += 2 * PI * angular_speed * delta
 	if angle > 2.0 * PI:
 		angle -= PI * 2.0
-	global_rotation = angle
+	$LocalFrame.global_rotation = angle
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
-func _on_area_shape_entered(_area_rid: RID, _area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
-	create_tween().tween_method(set_shader_blink_intensity, 1.0, 0, 0.2)	
+func _on_local_frame_area_shape_entered(_area_rid: RID, _area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
+	create_tween().bind_node(self).tween_method(set_shader_blink_intensity, 1.0, 0, 0.2)	
+	create_tween().bind_node(self).tween_method(set_health_bar_alpha, 1.0, 0.0, 0.5)
 	$"..".spawn_bullet_explosion(position)
 
 func set_shader_blink_intensity(value: float) -> void:
-	var shader_material: ShaderMaterial = $Polygon2D.material as ShaderMaterial
+	var shader_material: ShaderMaterial = $LocalFrame/Polygon2D.material as ShaderMaterial
 	shader_material.set_shader_parameter("blink_intensity", value)
+
+func set_health_bar_alpha(value: float) -> void:
+	$HealthBar.modulate.a = value

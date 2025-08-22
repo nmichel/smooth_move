@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://jf0tvfdqyeod"]
+[gd_scene load_steps=5 format=3 uid="uid://jf0tvfdqyeod"]
 
 [ext_resource type="Script" uid="uid://cyk6amhgkdr57" path="res://scripts/entity.gd" id="1_gr72c"]
 [ext_resource type="Shader" uid="uid://usf5u6khopgl" path="res://effects/shaders/blink.gdshader" id="2_gr72c"]
+[ext_resource type="PackedScene" uid="uid://buajyleg7pco0" path="res://scenes/health_bar.tscn" id="3_m0cyi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nwmpt"]
 resource_local_to_scene = true
@@ -9,17 +10,21 @@ shader = ExtResource("2_gr72c")
 shader_parameter/blink_color = Color(1, 1, 1, 1)
 shader_parameter/blink_intensity = 0.0
 
-[node name="Entity" type="Area2D"]
-collision_layer = 8
-collision_mask = 3
+[node name="Entity" type="Node2D"]
 script = ExtResource("1_gr72c")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_nwmpt")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[node name="HealthBar" parent="." instance=ExtResource("3_m0cyi")]
+
+[node name="LocalFrame" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LocalFrame"]
+
+[node name="Polygon2D" type="Polygon2D" parent="LocalFrame"]
+material = SubResource("ShaderMaterial_nwmpt")
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_shape_entered" from="LocalFrame" to="." method="_on_local_frame_area_shape_entered"]

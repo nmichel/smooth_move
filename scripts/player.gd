@@ -45,8 +45,7 @@ func _process(delta: float) -> void:
 	position += speed_direction * linear_speed * delta
 
 func _on_local_frame_area_shape_entered(_body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
-	var tween: Tween = create_tween()
-	tween.tween_method(set_shader_blink_intensity, 1.0, 0, 0.2)
+	create_tween().bind_node(self).tween_method(set_shader_blink_intensity, 1.0, 0, 0.2)
 	$"..".start_shake_camera()
 
 func set_shader_blink_intensity(value: float) -> void:
