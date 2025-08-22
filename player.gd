@@ -8,13 +8,12 @@ var angle: float = 0.0
 var linear_speed: float = 0.0
 var speed_direction: Vector2 = Vector2(cos(angle), sin(angle))
 
+@onready var polygon: Polygon2D = $Polygon2D
+
 func _ready() -> void:
 	$Polygon2D.polygon = $CollisionPolygon2D.polygon
-	# set_collision_mask(8)
+	$Polygon2D.color = Color.WEB_PURPLE
 
-	print("player collision layer: ", collision_layer)
-	print("player collision mask: ", collision_mask)
-	
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("ui_accept"):
 		get_tree().root.get_node("Game").spawn_bullet(position, angle)
@@ -46,4 +45,10 @@ func _process(delta: float) -> void:
 	position += speed_direction * linear_speed * delta
 
 func _on_area_shape_entered(_body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
-	linear_speed = 0
+	var tween: Tween = create_tween()
+	tween.tween_method(set_shader_blink_intensity, 1.0, 0, 0.2)
+	$"..".start_shake_camera()
+
+func set_shader_blink_intensity(value: float) -> void:
+	var shader_material: ShaderMaterial = polygon.material as ShaderMaterial
+	shader_material.set_shader_parameter("blink_intensity", value)

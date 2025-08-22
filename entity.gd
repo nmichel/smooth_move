@@ -30,4 +30,9 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
 func _on_area_shape_entered(_area_rid: RID, _area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
-	pass
+	create_tween().tween_method(set_shader_blink_intensity, 1.0, 0, 0.2)	
+	$"..".spawn_bullet_explosion(position)
+
+func set_shader_blink_intensity(value: float) -> void:
+	var shader_material: ShaderMaterial = $Polygon2D.material as ShaderMaterial
+	shader_material.set_shader_parameter("blink_intensity", value)
