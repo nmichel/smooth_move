@@ -1,17 +1,19 @@
 extends Node2D
 
-static var builder_map: Array[Callable] = [
-	MobBuilder.build_tri,
-	MobBuilder.build_quad,
-	MobBuilder.build_deca,
-]
-
 @onready var camera2D: Camera2D = $Camera2D
 @onready var cameraShake: FastNoiseLite = FastNoiseLite.new()
 
 func _ready() -> void:
-	# AudioManager.play_track(AudioManager.get_track_list()[0])
+	AudioManager.play_track(AudioManager.get_track_list()[0])
 	$SpawnMobTimer.start()
+
+func spawn_entity() -> void:
+	var size: Vector2 = get_viewport_rect().size
+	var pos: Vector2 = Vector2(randf_range(50, size.x - 50), 20)
+	var idx: int = randi() % MobBuilder.max_entity_id()
+	var power: int = randi() % 4 + 1
+	var mob: Entity = MobBuilder.spawn_entity(idx, pos, power)
+	add_child(mob)
 
 func spawn_bullet(pos: Vector2, angle: float) -> void:
 	add_child(Bullet.create(pos, angle))
@@ -32,10 +34,5 @@ func shake_camera(intensity: float) -> void:
 	camera2D.offset.y = camera_offset
 
 func _on_spawn_mob_timer_timeout() -> void:
-	var size: Vector2 = get_viewport_rect().size
-	var pos: Vector2 = Vector2(randf_range(50, size.x - 50), 20)
-	var idx: int = randi() % builder_map.size()
-	var power: int = randi() % 4
-	var mob: Entity = builder_map[idx].call(pos, power)
-	add_child(mob)
+	spawn_entity()
 	

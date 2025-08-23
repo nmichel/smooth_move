@@ -4,7 +4,7 @@ const LINEAR_SPEED_PER_SECOND: float = 1000;
 
 var angular_direction: float = 0.0
 var angular_speed: float = PI / 2.0 * 4
-var angle: float = 0.0
+var angle: float = -PI / 2
 var linear_speed: float = 0.0
 var speed_direction: Vector2 = Vector2(cos(angle), sin(angle))
 

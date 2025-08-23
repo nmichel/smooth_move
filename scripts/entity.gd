@@ -43,7 +43,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func _on_local_frame_area_shape_entered(_area_rid: RID, _area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	# Update state
-	health -= 1
+	health -= 10
 	if health <= 0:
 		$"..".spawn_explosion(position, color)
 		queue_free()
