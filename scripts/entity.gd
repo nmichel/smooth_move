@@ -52,7 +52,21 @@ func _on_local_frame_area_shape_entered(_area_rid: RID, _area: Area2D, _area_sha
 	# Lauch VFX
 	create_tween().bind_node(self).tween_method(set_shader_blink_intensity, 1.0, 0, 0.2)	
 	create_tween().bind_node(self).tween_method(set_health_bar_alpha, 1.0, 0.0, 0.5)
-	$"..".spawn_bullet_explosion(position)
+
+	var space_state: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
+	
+	var params: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
+	params.collide_with_areas = true
+	params.collide_with_bodies = false
+	params.collision_mask = 8
+	
+	var player: Node2D = get_node("/root/Game/Player")
+	params.from = player.global_position
+	params.to = $LocalFrame.global_position
+
+	var results: Dictionary = space_state.intersect_ray(params)
+	if ! results.is_empty(): 
+		$"..".spawn_particle_beam(results.position, results.normal)
 
 func set_shader_blink_intensity(value: float) -> void:
 	var shader_material: ShaderMaterial = $LocalFrame/Polygon2D.material as ShaderMaterial

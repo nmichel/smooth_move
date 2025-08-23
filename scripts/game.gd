@@ -10,14 +10,15 @@ static var builder_map: Array[Callable] = [
 @onready var cameraShake: FastNoiseLite = FastNoiseLite.new()
 
 func _ready() -> void:
-	AudioManager.play_track(AudioManager.get_track_list()[0])
+	# AudioManager.play_track(AudioManager.get_track_list()[0])
 	$SpawnMobTimer.start()
 
 func spawn_bullet(pos: Vector2, angle: float) -> void:
 	add_child(Bullet.create(pos, angle))
 
-func spawn_bullet_explosion(pos: Vector2) -> void:
-	add_child(ExplosionParticlesEffect.create(pos))
+func spawn_particle_beam(pos: Vector2, dir: Vector2) -> void:
+	add_child(BeamParticleEffect.create(pos, dir))
+	# add_child(ExplosionParticlesEffect.create(pos))
 
 func start_shake_camera() -> void:
 	create_tween().tween_method(shake_camera, 10.0, 1.0, 0.5)
