@@ -2,29 +2,34 @@
 
 [ext_resource type="Script" uid="uid://cje8tapeagk0o" path="res://effects/explosion_particles_effect.gd" id="1_8uwwv"]
 
-[sub_resource type="Gradient" id="Gradient_s2rqm"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.00784314)
+[sub_resource type="Gradient" id="Gradient_8uwwv"]
+offsets = PackedFloat32Array(0.00578035, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_de6kh"]
-gradient = SubResource("Gradient_s2rqm")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xbpp0"]
+gradient = SubResource("Gradient_8uwwv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qaunl"]
 lifetime_randomness = 1.0
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 25.75
-spread = 17.531
-radial_velocity_min = 225.35
-radial_velocity_max = 500.0
+spread = 15.96
+radial_velocity_min = 38.82
+radial_velocity_max = 365.29
 damping_max = 500.0
-scale_max = 3.0
-color_ramp = SubResource("GradientTexture1D_de6kh")
+scale_max = 20.0
+color = Color(5.77569e-06, 0.705845, 0.943737, 1)
+color_ramp = SubResource("GradientTexture1D_xbpp0")
+hue_variation_min = -0.03
+hue_variation_max = 0.08
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
 emitting = false
-amount = 20
+amount = 30
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
+randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_qaunl")
 script = ExtResource("1_8uwwv")

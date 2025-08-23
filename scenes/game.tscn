@@ -16,6 +16,6 @@ wait_time = 0.2
 anchor_mode = 0
 
 [node name="Player" parent="." instance=ExtResource("3_fc0e3")]
-position = Vector2(109, 129)
+position = Vector2(311, 645)
 
 [connection signal="timeout" from="SpawnMobTimer" to="." method="_on_spawn_mob_timer_timeout"]

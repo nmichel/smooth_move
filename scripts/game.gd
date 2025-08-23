@@ -20,6 +20,9 @@ func spawn_particle_beam(pos: Vector2, dir: Vector2) -> void:
 	add_child(BeamParticleEffect.create(pos, dir))
 	# add_child(ExplosionParticlesEffect.create(pos))
 
+func spawn_explosion(pos: Vector2, color: Color) -> void:
+	add_child(ExplosionParticlesEffect.create(pos, color))
+ 
 func start_shake_camera() -> void:
 	create_tween().tween_method(shake_camera, 10.0, 1.0, 0.5)
 

@@ -45,6 +45,7 @@ func _on_local_frame_area_shape_entered(_area_rid: RID, _area: Area2D, _area_sha
 	# Update state
 	health -= 1
 	if health <= 0:
+		$"..".spawn_explosion(position, color)
 		queue_free()
 		
 	health_bar.set_value(health / max_health)
