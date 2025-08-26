@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ddh5imeupfhb5"]
 
-[ext_resource type="Script" uid="uid://bbbe5crl4dopt" path="res://effects/beam_particles_effect.gd" id="1_ea2se"]
+[ext_resource type="Script" uid="uid://bbbe5crl4dopt" path="res://effects/particle_beam_effect.gd" id="1_m0k5e"]
 
 [sub_resource type="Gradient" id="Gradient_ea2se"]
 colors = PackedColorArray(0.933333, 0.843137, 0, 1, 1, 0.133333, 0.137255, 1)
@@ -40,7 +40,7 @@ scale_curve = SubResource("CurveTexture_mpt2f")
 color_initial_ramp = SubResource("GradientTexture1D_mpt2f")
 hue_variation_curve = SubResource("CurveTexture_gj77h")
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="ParticleBeamEffect" type="GPUParticles2D"]
 emitting = false
 amount = 20
 lifetime = 0.6
@@ -48,4 +48,4 @@ one_shot = true
 explosiveness = 1.0
 randomness = 0.15
 process_material = SubResource("ParticleProcessMaterial_8uwwv")
-script = ExtResource("1_ea2se")
+script = ExtResource("1_m0k5e")
