@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
-func _on_local_frame_area_shape_entered(_area_rid: RID, _area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
+func _on_local_frame_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	# Update state
 	health -= 10
 	if health <= 0:
@@ -60,9 +60,9 @@ func _on_local_frame_area_shape_entered(_area_rid: RID, _area: Area2D, _area_sha
 	params.collide_with_areas = true
 	params.collide_with_bodies = false
 	params.collision_mask = 8
-	
-	var player: Node2D = get_node("/root/Game/Player")
-	params.from = player.global_position
+	# "from" and "to" setup is of paramount importance here : testing ray must start outside
+	# the tested entity Area2D (and so start at the position of the entering "area").
+	params.from = area.global_position + (area.global_position - $LocalFrame.global_position).normalized() * scale_factor * 1.1
 	params.to = $LocalFrame.global_position
 
 	var results: Dictionary = space_state.intersect_ray(params)
