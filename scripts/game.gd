@@ -4,7 +4,7 @@ extends Node2D
 @onready var cameraShake: FastNoiseLite = FastNoiseLite.new()
 
 func _ready() -> void:
-	AudioManager.play_track(AudioManager.get_track_list()[0])
+	# AudioManager.play_track(AudioManager.get_track_list()[0])
 	$SpawnMobTimer.start()
 
 func spawn_entity() -> void:

@@ -43,31 +43,33 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func _on_local_frame_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	# Update state
-	health -= 10
+	health -= 5
 	if health <= 0:
 		$"..".spawn_explosion(position, color)
+		var note: DeathNote = DeathNote.create($LocalFrame.global_position, int(scale_factor))
+		get_tree().root.add_child(note)
 		queue_free()
+	else:
+		health_bar.set_value(health / max_health)
+
+		# Lauch VFX
+		create_tween().bind_node(self).tween_method(set_shader_blink_intensity, 1.0, 0, 0.2)	
+		create_tween().bind_node(self).tween_method(set_health_bar_alpha, 1.0, 0.0, 0.5)
+
+		var space_state: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
 		
-	health_bar.set_value(health / max_health)
+		var params: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
+		params.collide_with_areas = true
+		params.collide_with_bodies = false
+		params.collision_mask = 8
+		# "from" and "to" setup is of paramount importance here : testing ray must start outside
+		# the tested entity Area2D (and so start at the position of the entering "area").
+		params.from = area.global_position + (area.global_position - $LocalFrame.global_position).normalized() * scale_factor * 1.1
+		params.to = $LocalFrame.global_position
 
-	# Lauch VFX
-	create_tween().bind_node(self).tween_method(set_shader_blink_intensity, 1.0, 0, 0.2)	
-	create_tween().bind_node(self).tween_method(set_health_bar_alpha, 1.0, 0.0, 0.5)
-
-	var space_state: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
-	
-	var params: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
-	params.collide_with_areas = true
-	params.collide_with_bodies = false
-	params.collision_mask = 8
-	# "from" and "to" setup is of paramount importance here : testing ray must start outside
-	# the tested entity Area2D (and so start at the position of the entering "area").
-	params.from = area.global_position + (area.global_position - $LocalFrame.global_position).normalized() * scale_factor * 1.1
-	params.to = $LocalFrame.global_position
-
-	var results: Dictionary = space_state.intersect_ray(params)
-	if ! results.is_empty(): 
-		$"..".spawn_particle_beam(results.position, results.normal)
+		var results: Dictionary = space_state.intersect_ray(params)
+		if ! results.is_empty(): 
+			$"..".spawn_particle_beam(results.position, results.normal)
 
 func set_shader_blink_intensity(value: float) -> void:
 	var shader_material: ShaderMaterial = $LocalFrame/Polygon2D.material as ShaderMaterial

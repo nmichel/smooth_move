@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwl0feato0h8l"]
+
+[ext_resource type="Script" uid="uid://b0v6bnrnt4ckh" path="res://effects/death_note.gd" id="1_ca2mp"]
+
+[node name="DeathNode" type="Node2D"]
+script = ExtResource("1_ca2mp")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 0, 1)
+light_mask = 0
+offset_left = -30.0
+offset_top = -21.0
+offset_right = 30.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 30
+text = "100"
+horizontal_alignment = 1
