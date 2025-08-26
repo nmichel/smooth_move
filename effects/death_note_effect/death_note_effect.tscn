@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwl0feato0h8l"]
 
-[ext_resource type="Script" uid="uid://b0v6bnrnt4ckh" path="res://effects/death_note.gd" id="1_ca2mp"]
+[ext_resource type="Script" uid="uid://b0v6bnrnt4ckh" path="res://effects/death_note_effect/death_note_effect.gd" id="1_a62kc"]
 
 [node name="DeathNode" type="Node2D"]
-script = ExtResource("1_ca2mp")
+script = ExtResource("1_a62kc")
 
 [node name="Label" type="Label" parent="."]
 modulate = Color(1, 1, 0, 1)

@@ -1,4 +1,4 @@
-class_name DeathNote extends Node2D
+class_name DeathNoteEffect extends Node2D
 
 @export var duration: float = 0.5
 @export var rise_amount: float = 40.0
@@ -8,10 +8,10 @@ var start_position: Vector2
 var scale_factor: float
 var text: String
 
-const DEATH_NOTE_SCENE = preload("res://effects/death_note.tscn")
+const SCENE = preload("res://effects/death_note_effect/death_note_effect.tscn")
 
 static func create(pos: Vector2, value: int) -> Node:
-	var effect: DeathNote = DEATH_NOTE_SCENE.instantiate()
+	var effect: DeathNoteEffect = SCENE.instantiate()
 	effect.start_position = pos
 	effect.text = str(value)
 	effect.scale_factor = min(1 + value * 0.02, 3)

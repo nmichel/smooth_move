@@ -1,6 +1,6 @@
 class_name Entity extends Node2D
 
-const ENTITY_SCENE: PackedScene = preload("res://scenes/entity.tscn")
+const ENTITY_SCENE: PackedScene = preload("res://scenes/entity/entity.tscn")
 
 @onready var health_bar: HealthBar = $HealthBar
 
@@ -46,7 +46,7 @@ func _on_local_frame_area_shape_entered(_area_rid: RID, area: Area2D, _area_shap
 	health -= 5
 	if health <= 0:
 		$"..".spawn_explosion(position, color)
-		var note: DeathNote = DeathNote.create($LocalFrame.global_position, int(scale_factor))
+		var note: DeathNoteEffect = DeathNoteEffect.create($LocalFrame.global_position, int(scale_factor))
 		get_tree().root.add_child(note)
 		queue_free()
 	else:

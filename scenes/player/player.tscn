@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbd40uim2adou"]
 
 [ext_resource type="Shader" uid="uid://usf5u6khopgl" path="res://effects/shaders/blink.gdshader" id="1_i3pqv"]
-[ext_resource type="Script" uid="uid://cfpxilrsagex3" path="res://scripts/player.gd" id="1_onrkg"]
-[ext_resource type="PackedScene" uid="uid://buajyleg7pco0" path="res://scenes/health_bar.tscn" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://cfpxilrsagex3" path="res://scenes/player/player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://buajyleg7pco0" path="res://scenes/health_bar/health_bar.tscn" id="3_qhqgy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i3pqv"]
 shader = ExtResource("1_i3pqv")

@@ -1,6 +1,6 @@
 class_name Bullet extends Area2D
 
-const BULLET_SCENE: PackedScene = preload("res://scenes/bullet.tscn")
+const BULLET_SCENE: PackedScene = preload("res://scenes/bullet/bullet.tscn")
 
 var speed_direction: Vector2;
 

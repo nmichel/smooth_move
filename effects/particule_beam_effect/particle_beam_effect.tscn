@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ddh5imeupfhb5"]
 
-[ext_resource type="Script" uid="uid://bbbe5crl4dopt" path="res://effects/particle_beam_effect.gd" id="1_m0k5e"]
+[ext_resource type="Script" uid="uid://bbbe5crl4dopt" path="res://effects/particule_beam_effect/particle_beam_effect.gd" id="1_m0k5e"]
 
 [sub_resource type="Gradient" id="Gradient_ea2se"]
 colors = PackedColorArray(0.933333, 0.843137, 0, 1, 1, 0.133333, 0.137255, 1)

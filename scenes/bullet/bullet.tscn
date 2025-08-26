@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://x54gilhf1cgy"]
 
-[ext_resource type="Script" uid="uid://dt3tbrq18k2ue" path="res://scripts/bullet.gd" id="1_mkf8s"]
+[ext_resource type="Script" uid="uid://dt3tbrq18k2ue" path="res://scenes/bullet/bullet.gd" id="1_mkf8s"]
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 2
