@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://dyrkhnmll62nt"]
 
 [ext_resource type="Script" uid="uid://f7akuqpbksbl" path="res://scenes/background/background.gd" id="1_oabld"]
-[ext_resource type="Texture2D" uid="uid://gid0fylphp3y" path="res://assets/textures/Blue Nebula 6 - 1024x1024.png" id="2_i7s6n"]
-[ext_resource type="Texture2D" uid="uid://dqlnw7dufab5i" path="res://assets/textures/60gojof57um91rlor2iuojt0jj-9bc37b4e0e51ff123299e761b31c1856.png" id="3_xehqc"]
-[ext_resource type="Texture2D" uid="uid://bvoprdkauoe84" path="res://assets/textures/black-and-white-angle-point-pattern-winter-snowflake-stars-dd78d6b34b5847786a5abdd43bce8eed.png" id="4_splo0"]
+[ext_resource type="Texture2D" uid="uid://gid0fylphp3y" path="res://scenes/background/texture/Blue Nebula 6 - 1024x1024.png" id="2_i7s6n"]
+[ext_resource type="Texture2D" uid="uid://dqlnw7dufab5i" path="res://scenes/background/texture/60gojof57um91rlor2iuojt0jj-9bc37b4e0e51ff123299e761b31c1856.png" id="3_xehqc"]
+[ext_resource type="Texture2D" uid="uid://bvoprdkauoe84" path="res://scenes/background/texture/black-and-white-angle-point-pattern-winter-snowflake-stars-dd78d6b34b5847786a5abdd43bce8eed.png" id="4_splo0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
 size = Vector2(20, 800)

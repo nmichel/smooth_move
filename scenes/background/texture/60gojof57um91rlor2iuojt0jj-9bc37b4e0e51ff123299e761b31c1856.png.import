@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvoprdkauoe84"
-path="res://.godot/imported/black-and-white-angle-point-pattern-winter-snowflake-stars-dd78d6b34b5847786a5abdd43bce8eed.png-acbf90cdf919db6e3bf1161b21620c25.ctex"
+uid="uid://dqlnw7dufab5i"
+path="res://.godot/imported/60gojof57um91rlor2iuojt0jj-9bc37b4e0e51ff123299e761b31c1856.png-c58887ab0423f51fef8d4cdd848e5822.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/black-and-white-angle-point-pattern-winter-snowflake-stars-dd78d6b34b5847786a5abdd43bce8eed.png"
-dest_files=["res://.godot/imported/black-and-white-angle-point-pattern-winter-snowflake-stars-dd78d6b34b5847786a5abdd43bce8eed.png-acbf90cdf919db6e3bf1161b21620c25.ctex"]
+source_file="res://scenes/background/texture/60gojof57um91rlor2iuojt0jj-9bc37b4e0e51ff123299e761b31c1856.png"
+dest_files=["res://.godot/imported/60gojof57um91rlor2iuojt0jj-9bc37b4e0e51ff123299e761b31c1856.png-c58887ab0423f51fef8d4cdd848e5822.ctex"]
 
 [params]
 
