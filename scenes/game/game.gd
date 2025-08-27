@@ -7,12 +7,12 @@ func _ready() -> void:
 	# AudioManager.play_track(AudioManager.get_track_list()[0])
 	$SpawnMobTimer.start()
 
-func spawn_entity() -> void:
+func spawn_enemy() -> void:
 	var size: Vector2 = get_viewport_rect().size
 	var pos: Vector2 = Vector2(randf_range(50, size.x - 50), 20)
-	var idx: int = randi() % MobBuilder.max_entity_id()
+	var idx: int = randi() % EnemyBuilder.max_enemy_id()
 	var power: int = randi() % 4 + 1
-	var mob: Entity = MobBuilder.spawn_entity(idx, pos, power)
+	var mob: Enemy = EnemyBuilder.spawn_enemy(idx, pos, power)
 	add_child(mob)
 
 func spawn_bullet(pos: Vector2, angle: float) -> void:
@@ -34,5 +34,5 @@ func shake_camera(intensity: float) -> void:
 	camera2D.offset.y = camera_offset
 
 func _on_spawn_mob_timer_timeout() -> void:
-	spawn_entity()
+	spawn_enemy()
 	

@@ -1,21 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://jf0tvfdqyeod"]
 
-[ext_resource type="Script" uid="uid://cyk6amhgkdr57" path="res://scenes/entity/entity.gd" id="1_gr72c"]
-[ext_resource type="Shader" uid="uid://usf5u6khopgl" path="res://effects/shaders/blink.gdshader" id="2_gr72c"]
-[ext_resource type="PackedScene" uid="uid://buajyleg7pco0" path="res://scenes/health_bar/health_bar.tscn" id="3_m0cyi"]
+[ext_resource type="Script" uid="uid://cyk6amhgkdr57" path="res://scenes/enemy/enemy.gd" id="1_40wdo"]
+[ext_resource type="PackedScene" uid="uid://buajyleg7pco0" path="res://scenes/health_bar/health_bar.tscn" id="2_tjssy"]
+[ext_resource type="Shader" uid="uid://usf5u6khopgl" path="res://effects/shaders/blink.gdshader" id="3_gl05p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nwmpt"]
 resource_local_to_scene = true
-shader = ExtResource("2_gr72c")
+shader = ExtResource("3_gl05p")
 shader_parameter/blink_color = Color(1, 1, 1, 1)
 shader_parameter/blink_intensity = 0.0
 
-[node name="Entity" type="Node2D"]
-script = ExtResource("1_gr72c")
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_40wdo")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="HealthBar" parent="." instance=ExtResource("3_m0cyi")]
+[node name="HealthBar" parent="." instance=ExtResource("2_tjssy")]
 
 [node name="LocalFrame" type="Area2D" parent="."]
 collision_layer = 8

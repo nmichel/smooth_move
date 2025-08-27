@@ -1,6 +1,6 @@
-class_name Entity extends Node2D
+class_name Enemy extends Node2D
 
-const ENTITY_SCENE: PackedScene = preload("res://scenes/entity/entity.tscn")
+const ENEMY_SCENE: PackedScene = preload("res://scenes/enemy/enemy.tscn")
 
 @onready var health_bar: HealthBar = $HealthBar
 
@@ -12,13 +12,13 @@ var angle: float = randf_range(0, 2 * PI)
 var angular_speed: float = randf_range(0, 1)
 var color: Color = Color.WHITE
 
-static func create(shape_in: PackedVector2Array, pos: Vector2, scale_factor_in: float) -> Entity:
-	var entity: Entity = ENTITY_SCENE.instantiate()
-	entity.scale_factor = scale_factor_in
-	entity.shape = shape_in
-	entity.position = pos
-	entity.max_health = scale_factor_in
-	return entity
+static func create(shape_in: PackedVector2Array, pos: Vector2, scale_factor_in: float) -> Enemy:
+	var enemy: Enemy = ENEMY_SCENE.instantiate()
+	enemy.scale_factor = scale_factor_in
+	enemy.shape = shape_in
+	enemy.position = pos
+	enemy.max_health = scale_factor_in
+	return enemy
 
 func _ready() -> void:
 	$LocalFrame.scale = Vector2(scale_factor, scale_factor)
@@ -66,7 +66,7 @@ func _on_local_frame_area_shape_entered(_area_rid: RID, area: Area2D, _area_shap
 		params.collide_with_bodies = false
 		params.collision_mask = 8
 		# "from" and "to" setup is of paramount importance here : testing ray must start outside
-		# the tested entity Area2D (and so start at the position of the entering "area").
+		# the tested enemy Area2D (and so start at the position of the entering "area").
 		params.from = area.global_position + (area.global_position - $LocalFrame.global_position).normalized() * scale_factor * 1.1
 		params.to = $LocalFrame.global_position
 
