@@ -10,7 +10,7 @@ shader_parameter/blink_intensity = 0.0
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_onrkg")
-shoot_freq = 0.2
+shoot_freq = 0.1
 
 [node name="LocalFrame" type="Area2D" parent="."]
 collision_mask = 8
