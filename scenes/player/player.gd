@@ -8,18 +8,34 @@ var angle: float = -PI / 2
 var linear_speed: float = 0.0
 var speed_direction: Vector2 = Vector2(cos(angle), sin(angle))
 
+var is_shooting: bool = false
+var next_shoot_wait: float
+@export var shoot_freq: float = 1.0
+
 @onready var polygon: Polygon2D = $LocalFrame/Polygon2D
 
 func _ready() -> void:
 	$LocalFrame/Polygon2D.polygon = $LocalFrame/CollisionPolygon2D.polygon
 	$LocalFrame/Polygon2D.color = Color.WEB_PURPLE
+	get_window().focus_exited.connect(func () -> void: is_shooting = false)
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_pressed("ui_accept"):
-		get_tree().root.get_node("Game").spawn_bullet(position, angle)
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		get_tree().current_scene.spawn_bullet(position, angle)
+		is_shooting = true
+		next_shoot_wait = shoot_freq
+	elif Input.is_action_just_released("ui_accept"):
+		is_shooting = false
 
 func _process(delta: float) -> void:
 	angular_direction = 0.0
+
+	if is_shooting:
+		if next_shoot_wait < 0:
+			get_tree().current_scene.spawn_bullet(position, angle)
+			next_shoot_wait += shoot_freq
+		else:
+			next_shoot_wait -= delta
 
 	if Input.is_action_pressed("ui_left"):
 		angular_direction = -1.0

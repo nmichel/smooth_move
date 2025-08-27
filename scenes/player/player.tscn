@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbd40uim2adou"]
+[gd_scene load_steps=4 format=3 uid="uid://bbd40uim2adou"]
 
 [ext_resource type="Shader" uid="uid://usf5u6khopgl" path="res://effects/shaders/blink.gdshader" id="1_i3pqv"]
 [ext_resource type="Script" uid="uid://cfpxilrsagex3" path="res://scenes/player/player.gd" id="1_onrkg"]
-[ext_resource type="PackedScene" uid="uid://buajyleg7pco0" path="res://scenes/health_bar/health_bar.tscn" id="3_qhqgy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i3pqv"]
 shader = ExtResource("1_i3pqv")
@@ -11,6 +10,7 @@ shader_parameter/blink_intensity = 0.0
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_onrkg")
+shoot_freq = 0.2
 
 [node name="LocalFrame" type="Area2D" parent="."]
 collision_mask = 8
@@ -22,9 +22,5 @@ polygon = PackedVector2Array(-10, -14, 10, -10, 10, 10, -10, 14)
 material = SubResource("ShaderMaterial_i3pqv")
 scale = Vector2(0.8, 0.8)
 uv = PackedVector2Array(-106.5, 14.5, -104, -112, -1, -95.5, -8, -17.5)
-
-[node name="HealthBar" parent="." instance=ExtResource("3_qhqgy")]
-modulate = Color(1, 1, 1, 1)
-position = Vector2(1, -22)
 
 [connection signal="area_shape_entered" from="LocalFrame" to="." method="_on_local_frame_area_shape_entered"]
