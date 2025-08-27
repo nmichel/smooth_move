@@ -24,8 +24,10 @@ func _ready() -> void:
 	$LocalFrame.scale = Vector2(scale_factor, scale_factor)
 	$LocalFrame.global_rotation += angular_speed
 	$LocalFrame/CollisionPolygon2D.polygon = shape
+	$LocalFrame/Line2D.points = shape
+	$LocalFrame/Line2D.default_color = color
 	$LocalFrame/Polygon2D.polygon = shape
-	$LocalFrame/Polygon2D.color = color
+	$LocalFrame/Polygon2D.color = Color(0, 0, 0, 0.5)
 
 	$HealthBar.position.y = -scale_factor - 10;
 
@@ -47,7 +49,7 @@ func _on_local_frame_area_shape_entered(_area_rid: RID, area: Area2D, _area_shap
 	if health <= 0:
 		$"..".spawn_explosion(position, color)
 		var note: DeathNoteEffect = DeathNoteEffect.create($LocalFrame.global_position, int(scale_factor))
-		get_tree().root.add_child(note)
+		get_tree().current_scene.add_child(note)
 		queue_free()
 	else:
 		health_bar.set_value(health / max_health)
@@ -72,7 +74,7 @@ func _on_local_frame_area_shape_entered(_area_rid: RID, area: Area2D, _area_shap
 			$"..".spawn_particle_beam(results.position, results.normal)
 
 func set_shader_blink_intensity(value: float) -> void:
-	var shader_material: ShaderMaterial = $LocalFrame/Polygon2D.material as ShaderMaterial
+	var shader_material: ShaderMaterial = $LocalFrame/Line2D.material as ShaderMaterial
 	shader_material.set_shader_parameter("blink_intensity", value)
 
 func set_health_bar_alpha(value: float) -> void:
