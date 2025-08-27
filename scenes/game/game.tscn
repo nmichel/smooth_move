@@ -1,23 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://clmxvv36h7hff"]
+[gd_scene load_steps=5 format=3 uid="uid://clmxvv36h7hff"]
 
 [ext_resource type="Script" uid="uid://b8tlgxr4osxkt" path="res://scenes/game/game.gd" id="1_0sr1o"]
 [ext_resource type="PackedScene" uid="uid://dyrkhnmll62nt" path="res://scenes/background/background.tscn" id="2_kelw5"]
 [ext_resource type="PackedScene" uid="uid://bbd40uim2adou" path="res://scenes/player/player.tscn" id="3_lfrn8"]
+[ext_resource type="PackedScene" uid="uid://dtbxo783gtjt2" path="res://hud/hud.tscn" id="4_kelw5"]
 
-[node name="Game" type="Node2D"]
+[node name="Main" type="Node"]
+
+[node name="Game" type="Node2D" parent="." groups=["game"]]
 script = ExtResource("1_0sr1o")
 
-[node name="SpawnMobTimer" type="Timer" parent="."]
+[node name="SpawnMobTimer" type="Timer" parent="Game"]
 wait_time = 0.2
 
-[node name="Background" parent="." instance=ExtResource("2_kelw5")]
+[node name="Background" parent="Game" instance=ExtResource("2_kelw5")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Game"]
 anchor_mode = 0
 
-[node name="Player" parent="." instance=ExtResource("3_lfrn8")]
+[node name="Player" parent="Game" instance=ExtResource("3_lfrn8")]
 position = Vector2(311, 645)
 rotation = -1.5708
 linear_speed = 300.0
 
-[connection signal="timeout" from="SpawnMobTimer" to="." method="_on_spawn_mob_timer_timeout"]
+[node name="HUD" parent="." instance=ExtResource("4_kelw5")]
+
+[connection signal="timeout" from="Game/SpawnMobTimer" to="Game" method="_on_spawn_mob_timer_timeout"]

@@ -29,7 +29,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
-		get_tree().current_scene.spawn_bullet(position, angle)
+		get_tree().get_first_node_in_group("game").spawn_bullet(position, angle)
 		is_shooting = true
 		next_shoot_wait = shoot_freq
 	elif Input.is_action_just_released("ui_accept"):
@@ -58,7 +58,7 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if is_shooting:
 		if next_shoot_wait < 0:
-			get_tree().current_scene.spawn_bullet(position, angle)
+			get_tree().get_first_node_in_group("game").spawn_bullet(position, angle)
 			next_shoot_wait += shoot_freq
 		else:
 			next_shoot_wait -= delta

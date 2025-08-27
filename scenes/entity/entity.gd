@@ -49,7 +49,8 @@ func _on_local_frame_area_shape_entered(_area_rid: RID, area: Area2D, _area_shap
 	if health <= 0:
 		$"..".spawn_explosion(position, color)
 		var note: DeathNoteEffect = DeathNoteEffect.create($LocalFrame.global_position, int(scale_factor))
-		get_tree().current_scene.add_child(note)
+		get_tree().get_first_node_in_group("game").add_child(note)
+		GameState.add_to_score(int(scale_factor))
 		queue_free()
 	else:
 		health_bar.set_value(health / max_health)
