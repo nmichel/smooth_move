@@ -1,8 +1,10 @@
-class_name Enemy extends Node2D
+extends Node2D
+class_name Enemy
 
 const ENEMY_SCENE: PackedScene = preload("res://scenes/enemy/enemy.tscn")
 
 @onready var health_bar: HealthBar = $HealthBar
+@onready var local_frame: Node2D = $LocalFrame
 
 var max_health: float
 var health: float
@@ -47,10 +49,8 @@ func _on_local_frame_area_shape_entered(_area_rid: RID, area: Area2D, _area_shap
 	# Update state
 	health -= 5
 	if health <= 0:
-		$"..".spawn_explosion(position, color)
-		var note: DeathNoteEffect = DeathNoteEffect.create($LocalFrame.global_position, int(scale_factor))
-		get_tree().get_first_node_in_group("game").add_child(note)
-		GameState.add_to_score(int(scale_factor))
+		GameState.enemy_died.emit(self)
+
 		queue_free()
 	else:
 		health_bar.set_value(health / max_health)
@@ -71,8 +71,7 @@ func _on_local_frame_area_shape_entered(_area_rid: RID, area: Area2D, _area_shap
 		params.to = $LocalFrame.global_position
 
 		var results: Dictionary = space_state.intersect_ray(params)
-		if ! results.is_empty(): 
-			$"..".spawn_particle_beam(results.position, results.normal)
+		GameState.enemy_hit.emit(self, results)
 
 func set_shader_blink_intensity(value: float) -> void:
 	var shader_material: ShaderMaterial = $LocalFrame/Line2D.material as ShaderMaterial
