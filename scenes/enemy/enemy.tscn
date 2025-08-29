@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://jf0tvfdqyeod"]
+[gd_scene load_steps=6 format=3 uid="uid://jf0tvfdqyeod"]
 
 [ext_resource type="Script" uid="uid://cyk6amhgkdr57" path="res://scenes/enemy/enemy.gd" id="1_40wdo"]
+[ext_resource type="PackedScene" uid="uid://dqc5pgwdpwxj3" path="res://components/out_of_screen_component.tscn" id="2_gl05p"]
 [ext_resource type="PackedScene" uid="uid://buajyleg7pco0" path="res://scenes/health_bar/health_bar.tscn" id="2_tjssy"]
 [ext_resource type="Shader" uid="uid://usf5u6khopgl" path="res://effects/shaders/blink.gdshader" id="3_gl05p"]
 
@@ -13,7 +14,7 @@ shader_parameter/blink_intensity = 0.0
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_40wdo")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="OutOfScreenComponent" parent="." instance=ExtResource("2_gl05p")]
 
 [node name="HealthBar" parent="." instance=ExtResource("2_tjssy")]
 
@@ -28,7 +29,7 @@ collision_mask = 3
 [node name="Line2D" type="Line2D" parent="LocalFrame"]
 material = SubResource("ShaderMaterial_nwmpt")
 closed = true
-width = 0.1
+width = 3.0
 
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="LocalFrame" to="." method="_on_local_frame_area_entered"]
 [connection signal="area_shape_entered" from="LocalFrame" to="." method="_on_local_frame_area_shape_entered"]

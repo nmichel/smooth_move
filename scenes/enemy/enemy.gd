@@ -4,7 +4,6 @@ class_name Enemy
 const ENEMY_SCENE: PackedScene = preload("res://scenes/enemy/enemy.tscn")
 
 @onready var health_bar: HealthBar = $HealthBar
-@onready var local_frame: Node2D = $LocalFrame
 
 var max_health: float
 var health: float
@@ -23,7 +22,6 @@ static func create(shape_in: PackedVector2Array, pos: Vector2, scale_factor_in: 
 	return enemy
 
 func _ready() -> void:
-	$LocalFrame.scale = Vector2(scale_factor, scale_factor)
 	$LocalFrame.global_rotation += angular_speed
 	$LocalFrame/CollisionPolygon2D.polygon = shape
 	$LocalFrame/Line2D.points = shape

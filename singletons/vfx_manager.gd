@@ -8,7 +8,7 @@ func _ready() -> void:
 	
 func _on_enemy_died(enemy: Enemy) -> void:
 	game.add_child(ExplosionParticlesEffect.create(enemy.position, enemy.color))
-	game.add_child(DeathNoteEffect.create(enemy.local_frame.global_position, int(enemy.scale_factor)))
+	game.add_child(DeathNoteEffect.create(enemy.position, int(enemy.scale_factor)))
 
 	# To move out
 	GameState.add_to_score(int(enemy.scale_factor))
