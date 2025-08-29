@@ -1,18 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://x54gilhf1cgy"]
+[gd_scene load_steps=5 format=3 uid="uid://x54gilhf1cgy"]
 
 [ext_resource type="Script" uid="uid://dt3tbrq18k2ue" path="res://scenes/bullet/bullet.gd" id="1_mkf8s"]
+[ext_resource type="PackedScene" uid="uid://dqc5pgwdpwxj3" path="res://components/out_of_screen_component.tscn" id="2_83itf"]
+[ext_resource type="PackedScene" uid="uid://cpyncy3i2e4ux" path="res://components/hitbox_component.tscn" id="3_0vdx3"]
+[ext_resource type="PackedScene" uid="uid://c8ncisesklivy" path="res://components/health_component.tscn" id="4_0vdx3"]
 
-[node name="Bullet" type="Area2D"]
-collision_layer = 2
-collision_mask = 8
+[node name="Bullet" type="Node2D"]
 script = ExtResource("1_mkf8s")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(5, 0, -5, 5, -5, -5)
+[node name="OutOfScreenComponent" parent="." instance=ExtResource("2_83itf")]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 
-[node name="VisibleOnScreenNotifier2d" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_0vdx3")]
+collision_layer = 2
+collision_mask = 8
+health_component = NodePath("../HealthComponent")
 
-[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2d" to="." method="_on_bullet_visibility_notifier_screen_exited"]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="HitboxComponent"]
+polygon = PackedVector2Array(5, 0, -5, 5, -5, -5)
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_0vdx3")]
+MAX_HEALTH = 5
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]

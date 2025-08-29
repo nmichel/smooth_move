@@ -79,4 +79,9 @@ func set_shader_blink_intensity(value: float) -> void:
 
 func set_health_bar_alpha(value: float) -> void:
 	$HealthBar.modulate.a = value
-	
+
+func _on_local_frame_area_entered(area: Area2D) -> void:
+	if area is HitboxComponent:
+		var attack: HitboxComponent.Attack = HitboxComponent.Attack.new()
+		attack.amount = int(scale_factor)
+		area.damage(attack)

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqc5pgwdpwxj3"]
+
+[ext_resource type="Script" uid="uid://deoq6lw8ayeun" path="res://components/out_of_screen_component.gd" id="1_peiyt"]
+
+[node name="OutOfScreenComponent" type="VisibleOnScreenNotifier2D"]
+script = ExtResource("1_peiyt")
+
+[connection signal="screen_exited" from="." to="." method="_on_screen_exited"]
