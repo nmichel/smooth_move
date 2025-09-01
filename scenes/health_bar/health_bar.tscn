@@ -28,7 +28,6 @@ corner_radius_bottom_left = 2
 corner_detail = 5
 
 [node name="HealthBar" type="Node2D"]
-modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_1bvlm")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]

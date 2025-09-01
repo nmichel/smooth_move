@@ -20,6 +20,7 @@ config/icon="res://assets/icons/icon.svg"
 AudioManager="*res://singletons/audio_manager.tscn"
 GameState="*res://singletons/game_state.gd"
 VfxManager="*res://singletons/vfx_manager.gd"
+EventBus="*res://singletons/event_bus.gd"
 
 [debug]
 

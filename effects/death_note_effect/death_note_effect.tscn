@@ -6,6 +6,7 @@
 script = ExtResource("1_a62kc")
 
 [node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
 modulate = Color(1, 1, 0, 1)
 light_mask = 0
 offset_left = -30.0

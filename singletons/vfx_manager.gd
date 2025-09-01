@@ -3,8 +3,8 @@ extends Node
 @onready var game: Game = get_tree().get_first_node_in_group("game")
 
 func _ready() -> void:
-	GameState.enemy_died.connect(_on_enemy_died)
-	GameState.enemy_hit.connect(_on_enemy_hit)
+	EventBus.enemy_died.connect(_on_enemy_died)
+	EventBus.enemy_hit.connect(_on_enemy_hit)
 	
 func _on_enemy_died(enemy: Enemy) -> void:
 	game.add_child(ExplosionParticlesEffect.create(enemy.position, enemy.color))
@@ -16,3 +16,4 @@ func _on_enemy_died(enemy: Enemy) -> void:
 func _on_enemy_hit(enemy: Enemy, results: Dictionary) -> void:
 	if ! results.is_empty():
 		game.add_child(BeamParticleEffect.create(results.position, results.normal))
+		game.add_child(HitNoteEffect.create(results.position, -1))

@@ -11,9 +11,10 @@ var health: int
 func _ready() -> void:
 	health = MAX_HEALTH
 
-func damage(damage: Damage) -> void:
-	health -= damage.amount
+func damage(params: Damage) -> void:
+	health -= params.amount
 	if health <= 0:
-		get_parent().queue_free()
+		die()
 
-	
+func die() -> void:
+	get_parent().queue_free()
